@@ -1,0 +1,41 @@
+{
+  "name": "dsh-bili-feed",
+  "version": "0.1.0",
+  "description": "Bilibili viewer for DeepSeek Harness: look up a video, scroll the homepage feed, and format share links. Read-only — no comments, likes, coins, or follows.",
+  "type": "module",
+  "main": "lib/index.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "README.md"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "plugin",
+    "bilibili",
+    "bili"
+  ],
+  "dependencies": {
+    "@deepseek-ai/schemastery": "~3.18.5"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-tools": ">=0.2.0-rc.2 <0.3.0"
+  }
+}

@@ -1,0 +1,11 @@
+# dsh-bili-feed 的宿主补丁：声明需要哪些服务。
+# 没有 inject 时 ctx.get('tools') 会是 undefined，工具注册会静默失败。
+- insert:
+    - id: bili-feed
+      name: dsh-bili-feed
+      inject:
+        - tools
+      config:
+        vdSource: afe7444fb0a17db50bfb3bdb60168af2
+        cookie: ''
+        feedCount: '12'
