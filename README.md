@@ -2,13 +2,16 @@
 
 让 DSH 里的模型能看 B 站、刷 B 站、读字幕、分享视频。
 
-四件事，**全是只读 GET**：
+七件事，**全是只读 GET**：
 
 | 能力 | 工具 | 说明 |
 | --- | --- | --- |
 | 看视频 | `bili_video` | 标题、UP、时长、播放/点赞/投币、简介、分区 |
 | 刷首页 | `bili_feed` | 首页推荐流，热门榜兜底 |
 | 读字幕 | `bili_subtitle` | B 站 AI 字幕全文，中/英/日等 |
+| 读评论 | `bili_comments` | 第一页评论，热门/最新排序 |
+| 读弹幕 | `bili_danmaku` | 带时间轴，配合字幕对位 |
+| 看标签 | `bili_tags` | 标签比分区细，判断内容画像 |
 | 分享 | `bili_share` | `【标题】 链接` 格式 |
 
 **不做的事**：发评论、点赞、投币、收藏、关注、发弹幕。
@@ -54,7 +57,7 @@ pnpm add github:Cong0707/dsh-bili-feed
 
 文件内容就是一整行 `SESSDATA=xxx; bili_jct=xxx; DedeUserID=xxx`。
 
-只有 `bili_subtitle` 需要它。看视频、刷首页、分享不用登录。
+只有 `bili_subtitle` 需要它。看视频、刷首页、读评论、读弹幕、看标签、分享都不用登录。
 
 ## 用法
 
