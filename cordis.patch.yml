@@ -6,6 +6,6 @@
       inject:
         - tools
       config:
-        vdSource: afe7444fb0a17db50bfb3bdb60168af2
+        vdSource: ''
         cookie: ''
         feedCount: '12'
