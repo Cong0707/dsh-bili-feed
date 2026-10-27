@@ -18,7 +18,7 @@
 
 ```bash
 cd ~/.dsh/profiles/web
-pnpm add /path/to/dsh-bili-feed
+pnpm add github:Cong0707/dsh-bili-feed
 ```
 
 然后在 `cordis.patch.yml` 里加：
