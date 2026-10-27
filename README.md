@@ -2,17 +2,43 @@
 
 让 DSH 里的模型能看 B 站、刷 B 站、读字幕、分享视频。
 
-七件事，**全是只读 GET**：
+**十几件事，全是只读**，一个写接口都没接。
 
 | 能力 | 工具 | 说明 |
 | --- | --- | --- |
 | 看视频 | `bili_video` | 标题、UP、时长、播放/点赞/投币、简介、分区 |
+| **看画面** | `bili_watch` | ffmpeg 从 dash 直链抽 N 帧拼图 → 交给 `read_image` |
+| **主动逛** | `bili_look` | 多源候选 → 过滤去重 → 深读详情/标签/热评/弹幕 → 素材文本 |
 | 刷首页 | `bili_feed` | 首页推荐流，热门榜兜底 |
+| 搜索 | `bili_search` | 关键词搜视频（要 wbi 签名） |
+| 相关推荐 | `bili_related` | 顺着一条往外爬 |
+| 排行榜 | `bili_ranking` | 全站/分区，日榜/三日榜/周榜 |
+| 入站必刷 | `bili_precious` | 98 条全站经典老片 |
 | 读字幕 | `bili_subtitle` | B 站 AI 字幕全文，中/英/日等 |
 | 读评论 | `bili_comments` | 第一页评论，热门/最新排序 |
+| 楼中楼 | `bili_subreplies` | 某条评论下的回复 |
 | 读弹幕 | `bili_danmaku` | 带时间轴，配合字幕对位 |
 | 看标签 | `bili_tags` | 标签比分区细，判断内容画像 |
+| 登录状态 | `bili_whoami` | cookie 有没有效，当前是谁 |
+| 用户名片 | `bili_user` | 昵称、签名、等级、粉丝数 |
+| 用户投稿 | `bili_user_videos` | 某个 UP 投过什么 |
+| 收藏夹 | `bili_fav_folders` / `bili_fav_media` | 自己的收藏夹和里面有什么 |
+| 观看历史 | `bili_history` | 最近看过什么 |
 | 分享 | `bili_share` | `【标题】 链接` 格式 |
+
+### `bili_watch` 怎么「看」
+
+不下载整段视频。B 站给的是 DASH 直链，ffmpeg 能直接从 http 拉流并 seek：
+
+1. `x/player/playurl` 拿视频轨地址（`fnval=16` = DASH，只要视频轨，音频一点都不要）
+2. 掐掉头尾各 4%（片头黑场和片尾下滑栏最没信息量）
+3. 中间均布取 N 帧，每帧一次短 seek，合计几秒、几 MB
+4. `tile` 拼成一张 contact sheet，落到磁盘
+5. 返回**正斜杠**路径 —— 反斜杠写进 markdown 图片会显示成「无法预览」
+
+拿到路径后模型用 `read_image` 读，等于一次看完整条视频的关键画面。
+
+需要本机有 ffmpeg（`ffmpeg -version` 能跑就行）。没装的话 `bili_watch` 会明确告诉你，其它工具不受影响。
 
 **不做的事**：发评论、点赞、投币、收藏、关注、发弹幕。
 需要写权限的接口一个都没接。

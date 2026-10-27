@@ -1,7 +1,7 @@
 {
   "name": "dsh-bili-feed",
-  "version": "0.2.0",
-  "description": "Bilibili viewer for DeepSeek Harness: look up a video, scroll the homepage feed, read AI subtitles, comments, danmaku and tags, and format share links. Read-only — no posting, likes, coins, or follows.",
+  "version": "0.3.0",
+  "description": "Bilibili viewer for DeepSeek Harness: watch videos frame-by-frame via ffmpeg contact sheets, browse the feed, search, rankings, read AI subtitles, comments, danmaku, tags, users, favorites and history. Read-only — no posting, likes, coins, or follows.",
   "type": "module",
   "main": "lib/index.js",
   "engines": {
